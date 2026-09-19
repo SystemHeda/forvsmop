@@ -1,1 +1,34 @@
+workflows:
+  alamootplus_debug:
+    name: AlamootPlus Debug APK
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+
+    environment:
+      vars:
+        GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4096m -Dkotlin.daemon.jvm.options=-Xmx2048m"
+
+    scripts:
+      - name: Verify project files
+        script: |
+          set -e
+          pwd
+          ls -la
+          test -f gradlew
+          test -f settings.gradle
+          test -f app/build.gradle
+
+      - name: Build Debug APK
+        script: |
+          set -e
+          chmod +x gradlew
+          ./gradlew clean :app:assembleDebug --no-daemon --stacktrace
+
+    artifacts:
+      - app/build/outputs/apk/debug/*.apk
+
+    cache:
+      cache_paths:
+        - ~/.gradle/caches
+        - ~/.gradle/wrapper
 
