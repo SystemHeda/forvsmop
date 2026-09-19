@@ -6,23 +6,22 @@ workflows:
 
     environment:
       vars:
-        GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4096m -Dkotlin.daemon.jvm.options=-Xmx2048m"
+        GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4096m"
 
     scripts:
-      - name: Verify project files
+      - name: Verify files
         script: |
           set -e
           pwd
           ls -la
-          test -f gradlew
           test -f settings.gradle
           test -f app/build.gradle
 
-      - name: Build Debug APK
+      - name: Build with system Gradle (no wrapper)
         script: |
           set -e
-          chmod +x gradlew
-          ./gradlew clean :app:assembleDebug --no-daemon --stacktrace
+          gradle -v
+          gradle clean :app:assembleDebug --no-daemon --stacktrace
 
     artifacts:
       - app/build/outputs/apk/debug/*.apk
@@ -30,5 +29,3 @@ workflows:
     cache:
       cache_paths:
         - ~/.gradle/caches
-        - ~/.gradle/wrapper
-
