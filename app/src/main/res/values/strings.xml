@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AlamootPlus</string>
+    <string name="brand">Brand / برند</string>
+    <string name="stream_url">Stream URL (rtsp:// …)</string>
+    <string name="play">Play</string>
+    <string name="discover">Discover ONVIF</string>
+    <string name="enter_url">Enter a stream URL</string>
+    <string name="discovering">Discovering devices…</string>
+    <string name="found_devices">Devices found</string>
+</resources>
